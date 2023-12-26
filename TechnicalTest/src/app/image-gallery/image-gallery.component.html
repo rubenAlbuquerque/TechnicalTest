@@ -1,0 +1,356 @@
+<!-- <div class="image-container">
+    
+  <div *ngFor="let image of images" class="image-item">
+    <img
+      [src]="image.url"
+      alt="{{ image.name }}"
+      [style.height.px]="maxHeight"
+    />
+    <div class="image-details">
+      <p>{{ image.name }}</p>
+      <p>{{ image.author }}</p>
+      <p>{{ image.type }}</p>
+    </div>
+  </div>
+</div> -->
+<!-- <img [src]="image.url" class="card-img-top" alt="{{ image.name }}" style="max-height: {{ maxHeight }}px;" /> -->
+
+<!-- <div class="container mt-4">
+  <div class="row">
+    <div *ngFor="let image of images" class="col-md-4 mb-4">
+      <div class="card">
+        <img
+          [src]="image.url"
+          class="card-img-top"
+          [style.max-height.px]="maxHeight"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title">{{ image.name }}</h5>
+          <p class="card-text">{{ image.author }}</p>
+          <p class="card-text">{{ image.type }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="flex-row d-flex">
+    <div *ngFor="let image of images" class="mb-4 d-flex">
+      <div class="card flex-fill">
+        <img
+          [src]="image.url"
+          class="card-img-top object-fit-contain"
+          [style.maxHeight.px]="maxHeight"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title">{{ image.name }}</h5>
+          <p class="card-text">{{ image.author }}</p>
+          <p class="card-text">{{ image.type }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div
+  class="container mt-4 d-flex flex-row"
+  style="
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+  "
+>
+  <div *ngFor="let image of images" class="col-md-4 mb-4 d-flex">
+    <div class="card flex-fill">
+      <img
+        [src]="image.url"
+        class="card-img-top object-fit-contain"
+        [style.maxHeight.px]="maxHeight"
+        alt="{{ image.name }}"
+      />
+
+      <div class="card-body">
+        <h5 class="card-title">{{ image.name }}</h5>
+        <p class="card-text">{{ image.author }}</p>
+        <p class="card-text">{{ image.type }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div
+    class=""
+    style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      margin: 0;
+      padding: 10px;
+      box-sizing: border-box;
+    "
+  >
+    <div *ngFor="let image of images" class="mb-4 d-flex">
+      <div class="card">
+        <img
+          [src]="image.url"
+          class="card-img-top object-fit-cover"
+          style="height: 250px; width: auto"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title">{{ image.name }}</h5>
+          <p class="card-text">{{ image.author }}</p>
+          <p class="card-text">{{ image.type }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="d-flex flex-row row gx-1">
+    <div *ngFor="let image of images" class="row-col-auto mb-2 d-flex">
+      <div class="card">
+        <img
+          [src]="image.url"
+          class="card-img-top object-fit-contain"
+          style="height: 250px; width: auto"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title">{{ image.name }}</h5>
+          <p class="card-text">{{ image.author }}</p>
+          <p class="card-text">{{ image.type }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="row row-cols-auto gx-2 gy-4 mt-4">
+    <div *ngFor="let image of images">
+      <div class="cardd w-100">
+        <img
+          [src]="image.url"
+          class="card-img-top object-fit-contain"
+          style="height: 250px; width: auto"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body p-1">
+          <h6 class="card-title text-truncate mb-1 fw-medium">
+            {{ image.name }}
+          </h6>
+          <div class="d-flex justify-content-between">
+            <p class="card-text mb-0 small text-danger">
+              {{ image.author }}
+            </p>
+            <p class="card-text fw-medium">
+              {{ image.type }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="row row-cols-auto gx-2 gy-4 mt-4">
+    <div *ngFor="let image of images">
+      <div class="card position-relative w-100">
+        <img
+          [src]="image.url"
+          class="card-img-top object-fit-contain"
+          style="height: 250px; width: auto"
+          alt="{{ image.name }}"
+        />
+
+        <div class="card-body p-1">
+          <h6 class="card-title text-truncate mb-1 fw-medium">
+            {{ image.name }}
+          </h6>
+          <div class="d-flex justify-content-between">
+            <p class="card-text mb-0 small text-danger">
+              {{ image.author }}
+            </p>
+            <p class="card-text fw-medium">
+              {{ image.type }}
+            </p>
+          </div>
+
+
+          <button mat-icon-button class="position-absolute top-0 end-0 m-1">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button mat-icon-button class="position-absolute bottom-0 end-0 mb-6 mr-1">
+            <mat-icon>transfer_within_a_station</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="row row-cols-auto gx-2 gy-4 mt-4">
+    <div *ngFor="let image of images">
+      <div class="card w-100">
+        <div class="image-container position-relative">
+          <img
+            [src]="image.url"
+            class="card-img-top object-fit-contain"
+            style="height: 250px; width: auto"
+            alt="{{ image.name }}"
+          />
+
+          <button
+            mat-icon-button
+            class="position-absolute top-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            class="position-absolute bottom-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+        </div>
+
+        <div class="card-body p-1">
+          <h6 class="card-title text-truncate mb-1 fw-medium">
+            {{ image.name }}
+          </h6>
+          <div class="d-flex justify-content-between">
+            <p class="card-text mb-0 small text-danger">
+              {{ image.author }}
+            </p>
+            <p class="card-text fw-medium">
+              {{ image.type }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <div class="row row-cols-auto gx-2 gy-4 mt-4">
+    <div *ngFor="let image of images; let i = index">
+      <div
+        class="card w-100 border-0"
+        (mouseover)="onMouseEnter(i)"
+        (mouseout)="onMouseLeave(i)"
+        *ngIf="!image.show"
+      >
+        <div class="image-container position-relative">
+          <img
+            [src]="image.url"
+            class="card-img-top object-fit-contain"
+            style="height: 250px; width: auto"
+            alt="{{ image.name }}"
+          />
+
+          <button
+            mat-icon-button
+            class="position-absolute top-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+            *ngIf="cardHoverStates[i]"
+            (click)="removeImage(i)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button
+            class="position-absolute bottom-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+            *ngIf="cardHoverStates[i]"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+        </div>
+
+        <div class="card-body p-1">
+          <h6 class="card-title text-truncate mb-1 fw-medium">
+            {{ image.name }}
+          </h6>
+          <div class="d-flex justify-content-between">
+            <p class="card-text mb-0 small text-danger">
+              {{ image.author }}
+            </p>
+            <p class="card-text fw-medium">
+              {{ image.type }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container mt-4">
+  <div class="list-unstyled d-flex flex-wrap gap-3">
+    <!-- row-cols-auto gy-4 gx-2 -->
+    <div *ngFor="let image of images; let i = index" class="flex-grow-1">
+      <div class="card border-0" *ngIf="!image.show">
+        <div
+          class="image-container position-relative"
+          (mouseenter)="onMouseEnter(i)"
+          (mouseleave)="onMouseLeave(i)"
+        >
+          <img
+            [src]="image.url"
+            class="card-img-top object-fit-cover img-fluid w-100"
+            style="height: 250px"
+            alt="{{ image.name }}"
+          />
+
+          <!-- Buttons -->
+          <button
+            mat-icon-button
+            class="position-absolute top-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+            *ngIf="cardHoverStates[i]"
+            (click)="removeImage(i)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button
+            class="position-absolute bottom-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
+            *ngIf="cardHoverStates[i]"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+        </div>
+
+        <div class="card-body p-1">
+          <h6 class="card-title text-truncate mb-1 fw-medium">
+            {{ image.name }}
+          </h6>
+          <div class="d-flex justify-content-between">
+            <p class="card-text mb-0 small text-danger">
+              {{ image.author }}
+            </p>
+            <p class="card-text fw-medium">
+              {{ image.type }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

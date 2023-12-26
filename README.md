@@ -17,3 +17,13 @@ npm install @ng-bootstrap/ng-bootstrap
 
 # Lodash
 npm install lodash
+
+-- modificar angular.json
+npm start
+
+
+ng generate component navbar
+ng generate component search-bar
+
+--icons
+ng add @angular/material
