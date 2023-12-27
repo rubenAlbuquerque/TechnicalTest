@@ -1,8 +1,5 @@
 <div class="container mt-4">
   <div class="list-unstyled d-flex flex-wrap gap-3">
-    <!-- row-cols-auto gy-4 gx-2 -->
-    <!-- <div *ngFor="let image of images; let i = index" class="flex-grow-1"> -->
-    <!-- < *ngFor="let (key, image) of images | keyvalue; let i = index" class="flex-grow-1"> -->
     <div
       *ngFor="let image of getValuesDoObjeto(); let i = index"
       [ngClass]="{
@@ -10,11 +7,6 @@
         'flex-grow-1': !image.show
       }"
     >
-      <!-- <div *ngIf="!image.show"> -->
-      <!-- <div>
-        Chave: {{ image }} - Valor: {{ getChavesEValoresDoObjeto()[i][0] }}
-      </div> -->
-      <!-- <div>{{ print(image, getChavesEValoresDoObjeto()[i][0]) }}</div> -->
       <div
         class="card border-0"
         *ngIf="!image.show"
@@ -66,62 +58,6 @@
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </div>
   </div>
 </div>
-
-<!-- <div class="container mt-4">
-  <div class="list-unstyled d-flex flex-wrap gap-3">
-    <div
-      *ngFor="let image of getChavesEValoresDoObjeto(); let i = index"
-      class="flex-grow-1"
-    >
-      <div>Chave: {{ image[0] }} - Valor: {{ image[1] }}</div>
-      <div
-        class="card border-0"
-        *ngIf="!image[1].show"
-        (mouseenter)="onMouseEnter(i)"
-        (mouseleave)="onMouseLeave(i)"
-      >
-        <div class="image-container position-relative">
-          <img
-            [src]="image[1].imageData"
-            class="card-img-top object-fit-cover img-fluid w-100"
-            style="height: 250px"
-            alt="{{ image[1].name }}"
-          />
-
-          <button
-            mat-icon-button
-            class="position-absolute top-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
-            *ngIf="cardHoverStates[i]"
-            (click)="removeImage(image[1].keyvalue)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-
-          <button
-            class="position-absolute bottom-0 end-0 m-1 rounded border-0 d-flex align-items-center px-1.5 py-1"
-            *ngIf="cardHoverStates[i]"
-          >
-            <mat-icon>download</mat-icon>
-          </button>
-        </div>
-
-        <div class="card-body p-1">
-          <h6 class="card-title text-truncate mb-1 fw-medium">
-            {{ image[1].description }}
-          </h6>
-          <div class="d-flex justify-content-between">
-            <p class="card-text mb-0 small text-danger">
-              {{ image[1].titulo }}
-            </p>
-            <p class="card-text fw-medium">{{ image[1].preco }}$</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
- -->

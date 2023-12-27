@@ -20,7 +20,6 @@ export class DataSearchService {
 
   updateImages(images: any[]): void {
     this.imagesSubject.next(images);
-    // debugger;
   }
 
   private loadData(): void {
@@ -40,77 +39,23 @@ export class DataSearchService {
 
   getFilteredData(keyword: string): Observable<any[]> {
     const data = this.imagesSubject.getValue();
-    console.log('data:', data);
 
-    // const filteredImages = Object.values(data).filter((i) => {
-    //   console.log(i.palavrasChave);
-
-    //   i.palavrasChave.includes(keyword.toLowerCase());
-    // });
     const filteredImages = Object.values(data).filter((i) => {
-      console.log(i.palavrasChave);
 
-      // Verifica se pelo menos uma das palavras-chave inclui a keyword
       return i.palavrasChave.some((tag: Tag) =>
         tag.name.toLowerCase().includes(keyword.toLowerCase())
       );
     });
 
-    console.log('filteredImages:', filteredImages);
-    debugger;
     return of(filteredImages);
   }
   getData(i: any) {
     this.i = i;
-    console.log('images:', this.i);
     return i;
   }
 
   setData() {
-    console.log('images:', this.i);
     return this.i;
   }
 
-  // getFilteredData(keyword: string): Observable<any[]> {
-  //   const data = this.imagesSubject.value;
-  //   console.log('data:', data);
-
-  //   const filteredImages = Object.values(data).filter((i) =>
-  //     i.palavrasChave.includes(keyword.toLowerCase())
-  //   );
-
-  //   console.log('filteredImages', filteredImages);
-
-  //   return new Observable<any[]>((observer) => {
-  //     observer.next(filteredImages);
-  //     observer.complete();
-  //   });
-  // }
-
-  // updateImages(images: any[]): void {
-  //   // this.imagesSubject.next(images);
-  //   // Atualiza as imagens no localStorage
-  //   // localStorage.setItem('images', JSON.stringify(images));
-  //   localStorage.setItem('images', JSON.stringify(images));
-  // }
-
-  // getData() {
-
-  //   console.log('images:', this.images$);
-  //   return this.images$;
-  // }
-
-  // filterImagesByKeyword(keyword: string): Observable<any[]> {
-  //   const allImages = this.imagesSubject.value;
-
-  //   // Simula uma requisição assíncrona com delay
-  //   return of(allImages).pipe(
-  //     delay(300),
-  //     map((images) =>
-  //       images.filter((image) =>
-  //         image.palavrasChave.toLowerCase().includes(keyword.toLowerCase())
-  //       )
-  //     )
-  //   );
-  // }
 }

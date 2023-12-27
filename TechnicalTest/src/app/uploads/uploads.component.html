@@ -39,7 +39,7 @@
     </div>
 
     <div class="col-4 mt-5 p-4">
-      <form [formGroup]="uploadForm" (submit)="onSubmit()">
+      <form [formGroup]="uploadForm">
         <!-- Título -->
         <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Título</label>
@@ -49,7 +49,15 @@
             placeholder="Inserir Título"
             formControlName="titulo"
           />
-          <!-- <div *ngIf="uploadForm.controls.['titulo'].invalid && uploadForm.controls.['titulo'].touched">Titulo is required</div> -->
+          <div
+            *ngIf="
+              uploadForm.controls['titulo'].invalid &&
+              uploadForm.controls['titulo'].touched
+            "
+            class="fs-6 lh-1 fw-semibold text-danger"
+          >
+            Titulo is required
+          </div>
         </div>
         <!-- Nome do Ficheiro -->
         <div class="mb-2 d-flex flex-column">
@@ -60,11 +68,18 @@
             (change)="onselectfile($event)"
             formControlName="nomeDoFicheiro"
           />
-          <!-- <div *ngIf="uploadForm.controls.nomeDoFicheiro.invalid && uploadForm.controls.nomeDoFicheiro.touched">Nome Do Ficheiro is required</div> -->
+          <div
+            *ngIf="
+              uploadForm.controls['nomeDoFicheiro'].invalid &&
+              uploadForm.controls['nomeDoFicheiro'].touched
+            "
+            class="fs-6 lh-1 fw-semibold text-danger"
+          >
+            Nome do Ficheiro is required
+          </div>
         </div>
 
         <!-- Palavras chaves-->
-        <!-- <app-tag-input></app-tag-input> -->
         <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Palavras Chave</label>
 
@@ -95,7 +110,6 @@
               />
             </mat-chip-grid>
           </mat-form-field>
-          <!-- <div *ngIf="uploadForm.controls.titulo.invalid && uploadForm.controls.titulo.touched">Titulo is required</div> -->
         </div>
 
         <!-- Preco -->
@@ -108,14 +122,16 @@
             placeholder="00.00$"
             formControlName="preco"
           />
-          <!-- <div
+
+          <div
             *ngIf="
-              uploadForm.controls.preco.invalid &&
-              uploadForm.controls.preco.touched
+              uploadForm.controls['preco'].invalid &&
+              uploadForm.controls['preco'].touched
             "
+            class="fs-6 lh-1 fw-semibold text-danger"
           >
             Preco is required
-          </div> -->
+          </div>
         </div>
 
         <!-- Descrição -->
@@ -129,18 +145,18 @@
             placeholder="Inserir Descrição"
             formControlName="description"
           ></textarea>
-          <!-- <div
+          <div
             *ngIf="
-              uploadForm.controls.description.invalid &&
-              uploadForm.controls.description.touched
+              uploadForm.controls['description'].invalid &&
+              uploadForm.controls['description'].touched
             "
+            class="fs-6 lh-1 fw-semibold text-danger"
           >
             Description is required
-          </div> -->
+          </div>
         </div>
 
         <!-- Data upload -->
-
         <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Data de Upload</label>
           <input
@@ -151,14 +167,15 @@
             [(bsValue)]="dataAtuall"
             formControlName="dataUpload"
           />
-          <!-- <div
+          <div
             *ngIf="
-              uploadForm.controls.dataUpload.invalid &&
-              uploadForm.controls.dataUpload.touched
+              uploadForm.controls['dataUpload'].invalid &&
+              uploadForm.controls['dataUpload'].touched
             "
+            class="fs-6 lh-1 fw-semibold text-danger"
           >
             Data Upload is required
-          </div> -->
+          </div>
         </div>
       </form>
     </div>

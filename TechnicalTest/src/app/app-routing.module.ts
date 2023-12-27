@@ -7,7 +7,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'uploads', component: UploadsComponent },
-  // { path: 'detail/:id', component: MovieDetailComponent }
 ];
 
 @NgModule({

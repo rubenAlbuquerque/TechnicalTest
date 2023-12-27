@@ -51,10 +51,8 @@ import { DataSearchService } from './data-search.service';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     TagInputModule,
-    // NgxChipsModule,
   ],
   providers: [
-    //  { provide: LOCALE_ID, useValue: 'pt' }
     DataSearchService,
   ],
   bootstrap: [AppComponent],

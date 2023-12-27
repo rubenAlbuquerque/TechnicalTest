@@ -65,7 +65,6 @@ export class ImageGalleryComponent {
 
   getValuesDoObjeto() {
     const i = this.dataSearchService.setData();
-    console.log('i:', i);
 
     if (i != undefined) {
       debugger;
@@ -75,14 +74,11 @@ export class ImageGalleryComponent {
 
     this.dataSearchService.images$.subscribe((images) => {
       this.img = images;
-      // console.log('imagesDDDDD:', images);
     });
-    // console.log('images:', this.img);
-    console.log('print', Object.values(this.img));
     return Object.values(this.img);
   }
 
-  print(k: any, v: any) {
-    // console.log('print', k, v);
-  }
+  // print(k: any, v: any) {
+  //   // console.log('print', k, v);
+  // }
 }
