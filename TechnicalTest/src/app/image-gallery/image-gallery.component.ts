@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../local-storage.service';
+import { DataSearchService } from '../data-search.service';
 
 @Component({
   selector: 'app-image-gallery',
@@ -9,118 +10,79 @@ import { LocalStorageService } from '../local-storage.service';
 export class ImageGalleryComponent {
   cardHoverStates: { [key: number]: boolean } = {};
   isHovered: boolean = true;
-  images: any[] = [];
+  img: any[] = [];
 
-  maxHeight = 300; // Altura máxima
-
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private dataSearchService: DataSearchService
+  ) {}
 
   onMouseEnter(index: number) {
     this.cardHoverStates[index] = true;
-    console.log('cardHoverStates[index] : true', this.cardHoverStates[index]);
+    // console.log('cardHoverStates[index] : true', this.cardHoverStates[index]);
   }
 
   onMouseLeave(index: number) {
     this.cardHoverStates[index] = false;
-    console.log('cardHoverStates[index] : false', this.cardHoverStates[index]);
+    // console.log('cardHoverStates[index] : false', this.cardHoverStates[index]);
   }
-  // removeImage(i)
-  // removeImage(index: number) {
-  //   console.log('olaaaaaa:', this.images);
-  //   this.images[index].show = !this.images[index].show;
-  // }
-  removeImage(index: number): void {
-    // Update your images array
-    this.images[index].show = !this.images[index].show;
 
+  removeImage(id: any): void {
+    // Update your images array data: any
+    // console.log(data.show);
+    // const indexToUpdate = data.findIndex((objeto) => objeto.id === dataId);
+    // this.images[index].show = !this.images[index].show;
+    console.log(id, this.img);
+
+    if (this.img[id]) {
+      console.log('this.images[id].show', this.img[id].show);
+      this.img[id].show = !this.img[id].show;
+      // ,, !this.images[id].show;
+    }
+
+    // console.log(this.images[index], this.images[index].show);
+    // this.images[index].show = true;
+    // console.log(this.images[index], this.images[index].show);
     // Save the updated images array to local storage
-    this.localStorageService.setItem('images', this.images);
+    this.localStorageService.setItem('images', this.img);
+
     // console.log('localStorageService:', index, this.images);
     // console.log('localStorageService:', this.images[index]);
   }
 
-  restor(): void {
-    const storedImages = this.localStorageService.getItem('images');
+  ngOnInit(): void {}
 
-    storedImages.map((i: any) => {
-      i.show = false;
-    });
+  getChavesDoObjeto() {
+    // console.log(Object.values(this.images)[0].show);
+    // console.log(Object.entries(this.images));
+    return Object.values(this.img);
   }
 
-  ngOnInit(): void {
-    // Fetch images from local storage
-    const storedImages = this.localStorageService.getItem('images');
+  getChavesEValoresDoObjeto() {
+    // console.log(Object.entries(this.images));
+    return Object.entries(this.img);
+  }
 
-    // this.images = storedImages ? storedImages : [];
-    this.restor();
+  getValuesDoObjeto() {
+    const i = this.dataSearchService.setData();
+    console.log('i:', i);
 
-    if (storedImages) {
-      this.images = storedImages;
-      console.log('storedImages True:', storedImages.length);
-    } else {
-      this.images = [
-        {
-          name: 'Nome lorem i',
-          descricao: 'Imagem computador trabalho',
-          author: 'Mario Santos',
-          type: 'Gratis',
-          url: '../../assets/img/1.jpg',
-          show: true,
-        },
-        {
-          name: 'Imagem computador trabalho 2',
-          author: 'Mario Santos',
-          type: '15.99$',
-          url: '../../assets/img/2.jpg',
-        },
-        // {
-        //   name: 'Imagem de natal',
-        //   author: 'Mario Santos',
-        //   type: 'Comprado',
-        //   url: '../../assets/img/3.jpg',
-        // },
-        {
-          name: 'Imagem de natal 2',
-          author: 'Mario Santos',
-          type: '15.99$',
-          url: '../../assets/img/5.jpg',
-        },
-        {
-          name: 'Imagem camera trabalho',
-          author: 'Mario Santos',
-          type: 'Comprado',
-          url: '../../assets/img/4.jpg',
-        },
-        {
-          name: 'Imagem de natal 2',
-          author: 'Mario Santos',
-          type: '15.99$',
-          url: '../../assets/img/5.jpg',
-        },
-        {
-          name: 'Imagem de natal 3',
-          author: 'Mario Santos',
-          type: '15.99$',
-          url: '../../assets/img/6.jpg',
-        },
-        {
-          name: 'Imagem de natal 4',
-          author: 'Mario Santos',
-          type: 'Comprado',
-          url: '../../assets/img/7.jpg',
-        },
-        {
-          name: 'Imagem camera trabalho',
-          author: 'Mario Santos',
-          type: 'Comprado',
-          url: '../../assets/img/4.jpg',
-        },
-
-        // Adicionar imagens
-      ];
-      // Save default images to local storage
-      this.localStorageService.setItem('images', this.images);
-      console.log('storedImages false:', this.images);
+    if (i != undefined) {
+      debugger;
+      return Object.values(i);
     }
+    // debugger;
+
+    this.dataSearchService.images$.subscribe((images) => {
+      this.img = images;
+      // console.log('imagesDDDDD:', images);
+    });
+    // console.log('images:', this.img);
+    console.log('print', Object.values(this.img));
+    return Object.values(this.img);
+  }
+
+  print(k: any, v: any) {
+    // console.log('print', k, v);
   }
 }

@@ -1,0 +1,32 @@
+<div class="mb-2 d-flex flex-column">
+  <label class="form-labell fs-6 fw-medium">Palavras Chave</label>
+
+  <mat-form-field class="list list-unstyled bg-light">
+    <mat-chip-grid #chipGrid aria-label="Inserir Tags">
+      <mat-chip-row
+        *ngFor="let tag of Tags; let i = index"
+        (removed)="remove(tag)"
+        [editable]="true"
+        (edited)="edit(tag, $event)"
+        [aria-description]="'press enter to edit ' + tag.name"
+        class="p-0"
+      >
+        {{ tag.name }}
+        <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+      <input
+        type="text"
+        formControlName="palavrasChave"
+        class="form-control"
+        placeholder="New tag..."
+        [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-grid>
+  </mat-form-field>
+  <!-- <div *ngIf="uploadForm.controls.titulo.invalid && uploadForm.controls.titulo.touched">Titulo is required</div> -->
+</div>

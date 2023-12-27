@@ -1,11 +1,24 @@
 <app-navbar></app-navbar>
+<div *ngIf="successMessage" class="alert alert-success" role="alert">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>
 <div class="container p-0">
   <div class="d-flex justify-content-between">
     <div>
       <h1>Upload de Ficheiros</h1>
     </div>
     <div class="mt-3">
-      <button class="btn btn-danger d-flex align-items-center">
+      <button
+        mat-button
+        class="btn btn-danger d-flex align-items-center"
+        color="warn"
+        [disabled]="uploadForm.invalid"
+        (click)="finalizarUpload()"
+      >
         <mat-icon class="me-2">add_a_photo</mat-icon>
         <span>Finalizar Upload</span>
       </button>
@@ -16,66 +29,77 @@
 <div class="container bg-light mt-3">
   <div class="row">
     <div
-      class="col-8 mt-5 bg-primary fixed-height-500 d-flex justify-content-center align-items-center"
+      class="col-8 mt-5 p-0 d-flex justify-content-center align-items-center"
     >
-      <div class="image">
-        <img [src]="url" class="w-100 bg-warning" />
-        <!-- width="100px" height="100px" /> -->
-        <!-- <img src="../../assets/img/{{url}}" width="100px" height="100px"> -->
-        <!-- <input type="file" class="form-control" id="inputGroupFile02" /> -->
-        <!-- <label class="input-group-text" for="inputGroupFile02">Upd</label> -->
-      </div>
+      <img
+        [src]="url"
+        class="object-fit-cover img-fluid w-100 flex-grow-1 border-0"
+        style="height: 550px"
+      />
     </div>
 
-    <div class="col-4 mt-5 bg-danger p-4">
-      <!-- Angular Reactive form with titulo, nome do file, palavras chave, preco, descicao, data atual -->
-      <form [formGroup]="uploadForm">
-        <div class="mb-2">
+    <div class="col-4 mt-5 p-4">
+      <form [formGroup]="uploadForm" (submit)="onSubmit()">
+        <!-- Título -->
+        <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Título</label>
           <input
             type="text"
             class="form-control"
             placeholder="Inserir Título"
+            formControlName="titulo"
           />
-          <!-- <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
-          </div> -->
+          <!-- <div *ngIf="uploadForm.controls.['titulo'].invalid && uploadForm.controls.['titulo'].touched">Titulo is required</div> -->
         </div>
-        <div class="mb-2">
+        <!-- Nome do Ficheiro -->
+        <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Nome do Ficheiro</label>
           <input
             type="file"
             class="form-control"
             (change)="onselectfile($event)"
+            formControlName="nomeDoFicheiro"
           />
-          <!-- <button (click)="setimage(img.files)">SET</button> -->
-
-          <!-- <input
-            type="text"
-            class="form-control"
-            placeholder="Inserir Nome original do Ficheiro"
-          /> -->
-          <!-- <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
-          </div> -->
+          <!-- <div *ngIf="uploadForm.controls.nomeDoFicheiro.invalid && uploadForm.controls.nomeDoFicheiro.touched">Nome Do Ficheiro is required</div> -->
         </div>
 
-        <div class="mb-2">
+        <!-- Palavras chaves-->
+        <!-- <app-tag-input></app-tag-input> -->
+        <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Palavras Chave</label>
-          <input type="text" class="form-control" placeholder="Inserir Tags" />
-          <!-- <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
-          </div> -->
+
+          <mat-form-field class="list list-unstyled bg-light">
+            <mat-chip-grid #chipGrid aria-label="Inserir Tags">
+              <mat-chip-row
+                *ngFor="let tag of Tags; let i = index"
+                (removed)="remove(tag)"
+                [editable]="true"
+                (edited)="edit(tag, $event)"
+                [aria-description]="'press enter to edit ' + tag.name"
+                class="p-0"
+              >
+                {{ tag.name }}
+                <button matChipRemove [attr.aria-label]="'remove ' + tag.name">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              <input
+                type="text"
+                formControlName="palavrasChave"
+                class="form-control"
+                placeholder="New tag..."
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-grid>
+          </mat-form-field>
+          <!-- <div *ngIf="uploadForm.controls.titulo.invalid && uploadForm.controls.titulo.touched">Titulo is required</div> -->
         </div>
 
-        <!-- <mat-chip-list aria-label="Fish selection">
-          <mat-chip>One fish</mat-chip>
-          <mat-chip>Two fish</mat-chip>
-          <mat-chip color="primary" selected>Primary fish</mat-chip>
-          <mat-chip color="accent" selected>Accent fish</mat-chip>
-        </mat-chip-list> -->
-
-        <div class="mb-2">
+        <!-- Preco -->
+        <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Preço</label>
           <input
             type="number"
@@ -84,63 +108,59 @@
             placeholder="00.00$"
             formControlName="preco"
           />
-        </div>
-
-        <div class="mb-2 row">
-          <label class="col-md-2 col-form-label form-labell fs-6 fw-medium"
-            >Descrição</label
+          <!-- <div
+            *ngIf="
+              uploadForm.controls.preco.invalid &&
+              uploadForm.controls.preco.touched
+            "
           >
-          <div class="col-md-10">
-            <textarea
-              id="description"
-              formControlName="description"
-              class="form-control"
-              placeholder="Inserir Descrição"
-            ></textarea>
-          </div>
+            Preco is required
+          </div> -->
         </div>
 
-        <div class="mb-2">
+        <!-- Descrição -->
+        <div class="mb-2 d-flex flex-column">
+          <label class="form-labell fs-6 fw-medium">Descrição</label>
+
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-control"
+            placeholder="Inserir Descrição"
+            formControlName="description"
+          ></textarea>
+          <!-- <div
+            *ngIf="
+              uploadForm.controls.description.invalid &&
+              uploadForm.controls.description.touched
+            "
+          >
+            Description is required
+          </div> -->
+        </div>
+
+        <!-- Data upload -->
+
+        <div class="mb-2 d-flex flex-column">
           <label class="form-labell fs-6 fw-medium">Data de Upload</label>
-          <label class="form-labell fs-6 fw-medium">valor</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Selecione a data"
+            bsDatepicker
+            [(bsValue)]="dataAtuall"
+            formControlName="dataUpload"
+          />
+          <!-- <div
+            *ngIf="
+              uploadForm.controls.dataUpload.invalid &&
+              uploadForm.controls.dataUpload.touched
+            "
+          >
+            Data Upload is required
+          </div> -->
         </div>
       </form>
     </div>
   </div>
 </div>
-<!-- 
-<form [formGroup]="fileForm" (ngSubmit)="onSubmit()">
- <mat-form-field>
-    <mat-label>Título</mat-label>
-    <input matInput formControlName="title" placeholder="Inserir Titulo">
- </mat-form-field>
-
- <mat-form-field>
-    <mat-label>Nome do ficheiro</mat-label>
-    <input matInput formControlName="fileName" readonly placeholder="Inserir nome original do ficheiro">
- </mat-form-field>
-
- <mat-form-field>
-    <mat-label>Palavras Chave</mat-label>
-    <input matInput formControlName="tags" placeholder="Inserir Tags">
- </mat-form-field>
-
- <mat-form-field>
-    <mat-label>Preço</mat-label>
-    <input matInput formControlName="price" placeholder="00.00$">
- </mat-form-field>
-
- <mat-form-field>
-    <mat-label>Descrição</mat-label>
-    <textarea matInput formControlName="description" placeholder="Inserir descrição de ficheiro"></textarea>
- </mat-form-field>
-
- <mat-form-field>
-    <mat-label>Criado em</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="createdDate" placeholder="27/10/2022">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
- </mat-form-field>
-
- <button mat-raised-button color="primary" type="submit" [disabled]="!fileForm.valid">Finalizar Upload</button>
-</form> -->
