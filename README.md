@@ -1,4 +1,10 @@
 # TechnicalTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+git clone https://github.com/rubenAlbuquerque/TechnicalTest.git
+
+cd .\TechnicalTest\
+
+npm install
+
+npm start
 
