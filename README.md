@@ -1,42 +1,27 @@
 # TechnicalTest
 
-TechnicalTest
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
 
-<!-- file:///F:/mestrado/2%C2%BA%20Semestre/AMI%20-%20Aplicacoes%20Multimedia%20Interativas%20-%20Design/Trabalhos-Labs%20+%20Project/Lab%204%20-%20javascript/IMA8%20-AngulaJs.pdf -->
+## Development server
 
-ng new TechnicalTest --routing --style=scss
-cd TechnicalTest
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-# RxJS Subscriptions
+## Code scaffolding
 
-npm install subsink
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-# ng-bootstrap
+## Build
 
-npm install @ng-bootstrap/ng-bootstrap
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-# Lodash
+## Running unit tests
 
-npm install lodash
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
--- modificar angular.json
-npm start
+## Running end-to-end tests
 
-ng generate component navbar
-ng generate component search-bar
-ng generate component home
-ng generate component uploads
-ng generate component image-gallery
-ng generate component header-list-upload
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-ng generate service local-storage
-ng generate service dataSearch
+## Further help
 
---icons
-ng add @angular/material
-
-ng add ngx-bootstrap
-
-<!-- npm install --save @angular/common@latest -->
-
-npm install ngx-chips
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
